@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 
 
 
+
 app = Flask(__name__)
 
 books = [
@@ -24,6 +25,17 @@ print(__name__)
 @app.route('/books')
 def get_books():
     return jsonify({'books': books})
+
+
+#POST /BOOKS
+#{ 
+#
+# }
+
+
+@app.route('/books', methods=['POST'])
+def add_book():
+    return jsonify(request.get_json())
 
 #Get /store
 @app.route('/books/<int:isbn>')

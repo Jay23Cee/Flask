@@ -93,6 +93,14 @@ def get_book_by_isbn(isbn):
 @app.route('/books/<int:isbn>', methods =['PUT'])
 def replace_book(isbn):
     request_data = request.get_json()
+
+    if(not valid_put_request_data(request_data)):
+        invalidBookObjectErrorMsg = {
+            "error": "Valid book object must be passed in the request",
+            "helpString": "Data passed in similar to this {'name': 'bookname','prices':7.99}"
+        }
+
+
     new_book= {
         'name': request_data['name'],
         'price':request_data['price'],

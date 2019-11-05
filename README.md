@@ -4,5 +4,5 @@ working with Flask.
 
 //TODO LIST:
 
-stopped at "UPDATING Data"
-https://app.pluralsight.com/course-player?clipId=e4ad2810-b61a-4838-bb5e-d9bc97c36d73
+stopped at "how to add a patchroute"
+https://app.pluralsight.com/course-player?clipId=217dde81-2c3a-4c11-b495-bc20037d3ead

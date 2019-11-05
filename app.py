@@ -5,6 +5,9 @@ import json
 
 app = Flask(__name__)
 
+
+DEFAULT_PAGE_LIMIT = 3
+
 books = [
     {
         'name': 'Green Eggs and Ham',
@@ -15,7 +18,15 @@ books = [
         'name': 'The Cat In The Hat',
         'price': 6.99,
         'isbn': 9782371000193
+    },
+    {
+        'name': 'A',
+        'price': 7.99,
+        'isbn': 9780394800165
+
     }
+
+
 
  ]
 
@@ -65,12 +76,35 @@ def add_book( ):
 def get_book_by_isbn(isbn):
     return_value ={}
     for book in books:
-        if book in books:
+        if book["isbn"]==isbn:
             return_value={
                 'name': book["name"],
                 'price' : book["price"]
-                
             }
-        return jsonify(return_value)
+            
+    return jsonify(return_value)
 
+
+#put /books/91283127312
+#{
+    #'name' : 'The Odyssey'
+    #'price': 0.99
+#}
+@app.route('/books/<int:isbn>', methods =['PUT'])
+def replace_book(isbn):
+    request_data = request.get_json()
+    new_book= {
+        'name': request_data['name'],
+        'price':request_data['price'],
+        'isbn' : isbn
+    }
+    i = 0;
+    for book in books:
+        currentIsbn = book["isbn"]
+        if currentIsbn == isbn:
+            books[i] = new_book
+        i +=1
+    response = Response("", status=204)
+    return response
+    
 app.run(port=5000)
